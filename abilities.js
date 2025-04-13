@@ -11,7 +11,7 @@ async function rollAbilities(force) {
     if (player.gears["gear39"]) m *= 0.5;
     if (verifiedOres.canGenerateCaves()) {
         const caveRate = player.powerupVariables.caveBoosts.active ? 1/250 : 1/500;
-        if (Math.random() <= caveRate && player.settings.cavesEnabled) {
+        if ((player.settings.cavesEnabled || !player.pickaxes.pickaxe26) && Math.random() <= caveRate) {
             player.stats.cavesGenerated++;
             generateCave();
         }
@@ -45,7 +45,7 @@ function getTestAvg() {
 function powerup1(x, y) {
     if (!pickaxeStats[player.stats.currentPickaxe].canMineIn.includes(currentWorld)) return;
     if (Date.now() >= player.powerupCooldowns["powerup1"].cooldown && player.powerupCooldowns["powerup1"].unlocked) {
-        const multiplier = Math.floor(Math.log10(player.stats.blocksMined/500000)) + 1;
+        const multiplier = Math.floor(Math.log10((player.stats.blocksMined+1)/500000)) + 1;
         const amt = (100*multiplier)*(100*multiplier);
         if (amt > 1000000 || player.settings.simulatedRng) bulkGenerate(curY, amt, undefined, false);
         else {

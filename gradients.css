@@ -320,9 +320,6 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#oblivionFracturer {
-    margin-top: 5vw;
-}
 #oblivionFracturer span {
     display: inline-flex;
     align-items: center;
@@ -333,12 +330,11 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#nullChroma {
-    height: 26vw;
+#nullChroma,  #oblivionFracturer{
+    height: 20em;
     padding-top: 0;
 }
 #nullChroma span {
-    padding-top: 7vw;
     display: inline-flex;
     align-items: center;
     height: 100%;

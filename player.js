@@ -237,7 +237,8 @@ class playerTemplate {
         this.completedMilestones = [],
         this.watrEntered = false,
         this.galacticaEntered = false,
-        this.sr1Entered = false
+        this.sr1Entered = false,
+        this.unlockedEvents = Array.from({length: Object.keys(events).length}, () => false)
     }
 }
 let player = new playerTemplate();
@@ -267,7 +268,7 @@ const randBuff = {
 const powerupList = {
     "powerup1" : {
         title: "Terrestrial Terror",
-        description: "Mines a 101x101 area around the player, the size growing the more blocks mined you have. Has a cooldown of 15 minutes.",
+        description: `Mines a 101x101 area around the player, the size growing the more blocks mined you have. Has a cooldown of 15 minutes.`,
         cooldown: 900000,
         gradient: "linear-gradient(to right, #00ffff, #ff00ff, #ffff00)",
         checkRequirements: function() {
@@ -393,7 +394,12 @@ function displayPowerup(num) {
     const powerup = powerupList[powerupOrder[num]];
     get("powerupName").children[0].textContent = powerup.title;
     get("powerupName").children[0].style = `background:${powerup.gradient}; -webkit-background-clip: text; color: transparent; background-clip: text; -webkit-text-fill-color: transparent;`;
-    get("powerupDescription").textContent = powerup.description;
+    let description = powerup.description
+    if(num==0){
+        let mult = Math.floor(Math.log10((player.stats.blocksMined+1)/500000)) + 1
+        description = powerup.description.replace(/101x101/, 100*mult+"x"+100*mult)
+    }
+    get("powerupDescription").textContent = description;
     get("activatePowerup").setAttribute("onclick", `${powerupList[currentPowerupDisplayed].doAbility}`);
     updatePowerupCooldowns();
     checkAllConditions();
@@ -539,9 +545,6 @@ function oldDataToNew(data) {
         }
         if (data[3][4] != undefined) {
             newData.player.settings.baseMineCapacity = data[3][4];    
-        }
-        if (data[3][5] != undefined) {
-            newData.player.settings.minSpeed = data[3][5];
         }
         if (data[3][6] != undefined) {
             newData.player.settings.stopOnRare.active = data[3][6];
@@ -691,8 +694,6 @@ function loadNewData(data) {
         applySpawnMessageData();
         data.settings.automineUpdate ??= 25;
         player.settings.automineUpdate = data.settings.automineUpdate;
-        data.settings.minSpeed ??= 0;
-        player.settings.minSpeed = data.settings.minSpeed;
         data.settings.useNewMusic ??= true;
         if (!data.settings.useNewMusic) switchMusicType();
         player.settings.musicSettings.volume = data.settings.musicSettings.volume;
@@ -832,6 +833,8 @@ function loadNewData(data) {
         player.galacticaEntered = data.galacticaEntered;
         data.sr1Entered ??= false;
         player.sr1Entered = data.sr1Entered;
+        data.unlockedEvents ??= Array.from({length: Object.keys(events).length}, () => false)
+        player.unlockedEvents = data.unlockedEvents;
         data.completedMilestones ??= [];
         player.completedMilestones = [...data.completedMilestones];
         data.loungeSettings ??= {updateElements: true, deleteUnusedElements: true}
@@ -877,8 +880,8 @@ function loadNewData(data) {
 function smallVariantRoll() {
     let variantRoll = Math.random();
     if (variantRoll < 1/30) return 3;
-    else if (variantRoll < 1/15) return 2;
-    else if (variantRoll < 1/3) return 1;
+    else if (variantRoll < 3/30) return 2;
+    else if (variantRoll < 13/30) return 1;
     return 0;
 }
 beSilly = {

@@ -11,6 +11,7 @@ class secureLogs {
     #isLoaded;
     #hyperdimensionalCount;
     #playtimeLuck;
+    #hyperdimensionalsToAdd;
     constructor() {
         if (logCreated["created"]) location.reload();
         this.#spawnLogs = [];
@@ -26,6 +27,7 @@ class secureLogs {
         this.#isRightPickaxe = true;
         this.#canGenCaves = false;
         this.#hyperdimensionalCount = 0;
+        this.#hyperdimensionalsToAdd = 0;
         this.#playtimeLuck = 1;
         this.#onLoad()
     }
@@ -339,9 +341,15 @@ class secureLogs {
         return caveRateModifier;
     }
     addHyperdimensionalCount(amt) {
-        this.#hyperdimensionalCount += amt;
+        this.#hyperdimensionalsToAdd += amt;
+    }
+    applyHyperdimensionalLuck(){
+      if(this.#hyperdimensionalsToAdd > 0){
+        this.#hyperdimensionalCount += this.#hyperdimensionalsToAdd;
+        this.#hyperdimensionalsToAdd = 0;
         player.displayStatistics.luck = Math.floor(verifiedOres.getCurrentLuck())
         updateAllLayers();
+      }
     }
     countHyperdimensionalOres() {
         const ores = oreInformation.getOresByTier("Hyperdimensional")

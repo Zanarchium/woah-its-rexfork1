@@ -46,7 +46,7 @@ function mineBlock(x, y, cause) {
         mineBlockVariant = undefined;
     }
     if (mineBlockOre === "⚪") return;
-    if (oreList[mineBlockOre]["isBreakable"]) {
+    if (!unbreakable.includes(mineBlockOre)) {
         if (cause !== "infinity") checkAllAround(x, y);
         else placeLayerAround(x, y);
         if (oreList[mineBlockOre]["numRarity"] >= 750000) {
@@ -180,7 +180,6 @@ const generateBlock = function(location, wbm) {
     }
     let blockToGive = arr[low];
     let oreRarity = oreList[blockToGive]["numRarity"];
-    mine[location["Y"]][location["X"]] = blockToGive;
     if (oreRarity >= 750000) {
         let vInfo = rollVariant();
         if (player.gears["gear25"] && vInfo.v === 1) vInfo = rollVariant();
@@ -213,7 +212,8 @@ const generateBlock = function(location, wbm) {
         if (currentActiveEvent !== undefined) {
             if (getCurrentEventOre() === blockToGive && blockToGive !== "🪸") endEvent();
         } 
-    }
+    } else 
+    mine[location["Y"]][location["X"]] = blockToGive;
 }
 const bulkGenerate = function(y, amt, caveInfo, fromOffline) {
     const p = player.stats.currentPickaxe;
