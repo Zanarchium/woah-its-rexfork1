@@ -161,7 +161,7 @@ function mineCaveBlock(c, r, type, cause, luck) {
             return;
         }
         let caveMulti = getCaveMulti(type);
-        if (oreList[block]["isBreakable"]) {
+        if (!unbreakable.includes(block)) {
             //{type: block, x:c, y:r, fromReset:false, fromCave:true, caveMulti:caveMulti, variant:variant}
             if (checkFromCave({"X":c, "Y":r})["fromCave"]) giveBlock({type: block, x:c, y:r, fromReset:false, fromCave:true, caveMulti:caveMulti, variant:variant, amt:1});
             else giveBlock({type: block, x:c, y:r, variant: variant, amt:1});
