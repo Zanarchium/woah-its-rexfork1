@@ -889,8 +889,10 @@ function convertOre(ore, amt, type) {
         hasConverted = true;
     }
     resetVariantVals();
+    if(oreList[ore].oreTier == "Hyperdimensional"){
         verifiedOres.countHyperdimensionalOres()
-        verifiedOres.addHyperdimensionalCount(0)
+        verifiedOres.applyHyperdimensionalLuck(true)
+    }
 }
 function allButOne(ore) {
     if (playerInventory[ore] === undefined) {oreNotFound(); return;}
@@ -904,6 +906,10 @@ function allButOne(ore) {
         }
     }
     resetVariantVals();
+    if(oreList[ore].oreTier == "Hyperdimensional"){
+        verifiedOres.countHyperdimensionalOres()
+        verifiedOres.applyHyperdimensionalLuck(true)
+    }
 }
 function resetVariantVals() {
     get("variantInputName").value = "";
@@ -1100,7 +1106,7 @@ const portalLocations = {
     },
     1.1: {
         title: "Subrealm One",
-        desc: "The World of Flags!<br><br>Ore Tracker, Abyssal Leaper, Statistical Amplifier, Structural Service, Infinity Collector work here!<br><br>Tree of Life works here!<br><br>Unlock Requirement: 1 Flawless Tier Ore!<br><br>\"<i>The dreaded world of flags, the only good one being the trans flag</i>\" - Remsy",
+        desc: "The World of Flags!<br><br>Ore Tracker, Abyssal Leaper, Statistical Amplifier, Infinity Collector work here!<br><br>Tree of Life works here!<br><br>Unlock Requirement: 1 Flawless Tier Ore!<br><br>\"<i>The dreaded world of flags, the only good one being the trans flag</i>\" - Remsy",
         req: function() {return player.sr1Unlocked;},
         to: 1.1,
         hue: "40deg",

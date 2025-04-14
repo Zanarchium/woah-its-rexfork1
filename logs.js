@@ -343,8 +343,8 @@ class secureLogs {
     addHyperdimensionalCount(amt) {
         this.#hyperdimensionalsToAdd += amt;
     }
-    applyHyperdimensionalLuck(){
-      if(this.#hyperdimensionalsToAdd > 0){
+    applyHyperdimensionalLuck(force=false){
+      if(this.#hyperdimensionalsToAdd > 0 || force){
         this.#hyperdimensionalCount += this.#hyperdimensionalsToAdd;
         this.#hyperdimensionalsToAdd = 0;
         player.displayStatistics.luck = Math.floor(verifiedOres.getCurrentLuck())
