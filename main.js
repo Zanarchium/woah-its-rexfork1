@@ -1800,19 +1800,13 @@ function getCurrentEventOre() {
 }
 function rollEvent() {
     const arr = Object.keys(events);
-    for (let i = 0; i < arr.length; i++) {
-        for (let j = 0; j < arr.length - i - 1; j++) {
-            if (events[arr[j]].rate > events[arr[j + 1]].rate) {
-                let lesser = arr[j + 1];
-                arr[j + 1] = arr[j];
-                arr[j] = lesser;
-            }
-        }
-    }
+    arr.sort((a,b)=>events[arr[a]].rate-events[arr[b]].rate)
     for (let i = arr.length - 1; i >= 0; i--) if (currentWorld !== events[arr[i]].world) arr.splice(i, 1);
     const chosenValue = Math.random();
+    let sum = 0;
     for (let i = 0; i < arr.length; i++) {
-        if (chosenValue < events[arr[i]].rate) return arr[i]
+        sum+=events[arr[i]].rate;
+        if (chosenValue < sum) return arr[i]
     }
     return undefined;
 }

@@ -217,7 +217,7 @@ function mineCaveBlock(c, r, type, cause, luck) {
     }
 }
 function getCaveMaterial(type) {
-    return caveList[type].slice(-1);
+    return caveList[type].at(-1);
 }
 function sortCaveRarities(type) {
     let arr = caveList[type];
