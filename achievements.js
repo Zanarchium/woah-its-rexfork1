@@ -2264,14 +2264,15 @@ checkCurrentMilestones.pathsAndNames = {
 checkCurrentMilestones.shown = false;
 function unlockMilestone(path, name, data, ) {
     const info = milestoneList[path][name];
+    if(["m19", "sr1.7", "gp1.7.2"].includes(name)){
+        if(!info.check())return
+        info.element.classList.add("completedTrophy")
+      } else {
+        info.element.classList.add("completedMilestone")
+      }
     if (!data) player.completedMilestones.push({path: path, name: name});
     info.owned = true;
     info.element.children[2].textContent = "Completed: True";
-    if(["m19", "sr1.7", "gp1.7.2"].includes(name)){
-      info.element.classList.add("completedTrophy")
-    } else {
-      info.element.classList.add("completedMilestone")
-    }
     if (data) info.check();
     const unlocks = info.unlocks;
     if (unlocks.length === 0) {delete checkCurrentMilestones.pathsAndNames[path]; return;}

@@ -2064,7 +2064,7 @@ function checkPolys() {
             }
             if (i > 0) {
                 if (indexHasOre(polys[i - 1]) > 0) {
-                    insertIntoLayers({"ore":`${polys[i - 1]}`, "layers":[polyLocations[`${polys[i - 1]}`]], "useLuck":true});
+                    insertIntoLayers({"ore":`${polys[i - 1]}`, "layers":polyLocations[`${polys[i - 1]}`], "useLuck":true});
                     player.p[poly] = true;
                     switchWorldCraftables();
                 }
