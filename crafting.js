@@ -80,7 +80,7 @@ const recipes = {
     },
     "pickaxe13" : {
         name : "The Key",
-        recipe :  [{ore:"🟫", amt:10000000},{ore:"🧱", amt:10000000},{ore:"🌫️", amt:10000000},{ore:"🌊", amt:10000000},{ore:"🪨", amt:10000000},{ore:"☢️", amt:10000000},{ore:"🌵", amt:10000000},{ore:"📰", amt:10000000},{ore:"🌏", amt:1},{ore:"🔩", amt:1},{ore:"🧵", amt:1},{ore:"🌀", amt:1},{ore:"❄️", amt:1},{ore:"🥀", amt:1},{ore:"🔥", amt:1},{ore:"📝", amt:1}],
+        recipe :  [{ore:"🟫", amt:1000},{ore:"🧱", amt:1000},{ore:"🌫️", amt:1000},{ore:"🌊", amt:1000},{ore:"🪨", amt:1000},{ore:"☢️", amt:1000},{ore:"🌵", amt:1000},{ore:"📰", amt:1000},{ore:"🌏", amt:1},{ore:"🔩", amt:1},{ore:"🧵", amt:1},{ore:"🌀", amt:1},{ore:"❄️", amt:1},{ore:"🥀", amt:1},{ore:"🔥", amt:1},{ore:"📝", amt:1}],
         active : [],
     },
     "pickaxe14" : {
