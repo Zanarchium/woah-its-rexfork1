@@ -73,7 +73,7 @@ function init() {
     createAllLayers();
     insertIntoLayers({"ore":"🦾", "layers":["tvLayer", "brickLayer"], "useLuck":true});
     removeFromLayers({"ore":"HD 160529","layers":["waterLayer"]});
-    if (Math.random() < 1/1000) insertIntoLayers({"ore":"intercept", "layers":["globeLayer"], "useLuck":true})
+    if (Math.random() < 1/1) insertIntoLayers({"ore":"intercept", "layers":["globeLayer"], "useLuck":true})
     document.getElementById('dataText').value = "";
     if (Math.random() < 1/1000) document.getElementById("cat").innerText = "CatAxe";
     limitedTimer = setInterval(checkLimitedOres, 1000);
